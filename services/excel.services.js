@@ -1,4 +1,5 @@
 import moment from "moment";
+import { timeFormatter } from "./tools";
 
 export const downloadFile = (data_items) => {
   const GAMES = [
@@ -46,14 +47,17 @@ export const downloadFile = (data_items) => {
   ];
 
   let newArr = null;
-  newArr = data_items.map(({ game_title, name, createdAt, points }) => {
-    return {
-      TimeStamp: moment(createdAt).format("MMM DD, YYYY hh:mm:ss A"),
-      Name: name,
-      "Game Title": GAMES.filter((g) => g?.value == game_title)[0]?.label,
-      Duration: points,
-    };
-  });
+  newArr = data_items.map(
+    ({ game_title, name, createdAt, points, duration }) => {
+      return {
+        TimeStamp: moment(createdAt).format("MMM DD, YYYY hh:mm:ss A"),
+        Name: name,
+        "Game Title": GAMES.filter((g) => g?.value == game_title)[0]?.label,
+        Points: points,
+        Duration: timeFormatter(duration),
+      };
+    }
+  );
 
   var myFile = `${data_items[0]?.name}_${moment().format(
     "YYYY-MM-DD hh:mm:ss"

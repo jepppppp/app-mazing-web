@@ -49,3 +49,10 @@ export const deleteHTTPFormat = async ({ url }) => {
   const result = await res.json();
   return result;
 };
+export const timeFormatter = (time) => {
+  return time > 0
+    ? ` ${parseInt(time / 60)
+        .toString()
+        .padStart(2, "0")}:${(time % 60).toString().padStart(2, "0")}`
+    : " 00:00";
+};

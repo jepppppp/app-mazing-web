@@ -10,6 +10,7 @@ import { LoggedInNavbar } from "../components";
 import { formatDateForBirthday } from "../hooks/adjust-date";
 import { getAllUser } from "../services/user.services";
 import { getReports } from "../services/report.services";
+import { timeFormatter } from "../services/tools";
 
 const Reports = () => {
   const [dateStart, setDateStart] = useState(
@@ -125,6 +126,7 @@ const Reports = () => {
     "LRN",
     "Name",
     "Game Title",
+    "Points",
     "Duration",
   ];
   const SectionTable = () => {
@@ -161,6 +163,9 @@ const Reports = () => {
                   </Table.Cell>
                   <Table.Cell className="text-black capitalize">
                     {item.points}
+                  </Table.Cell>
+                  <Table.Cell className="text-black capitalize">
+                    {timeFormatter(item.duration)}
                   </Table.Cell>
                 </Table.Row>
               ))
